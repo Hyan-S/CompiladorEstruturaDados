@@ -1,0 +1,11 @@
+start|
+end|
+var|
+read|
+write|
+if|
+then|
+(|
+)|
+:|
+;
