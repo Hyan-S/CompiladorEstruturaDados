@@ -1,8 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Manipulador {
@@ -12,8 +9,12 @@ public class Manipulador {
     String line;
 
     String caminhoLeituraArq = "C:\\Users\\HyanCosta\\Desktop\\Compilador\\Arquivos";
-    String pastaSaida = "C:\\Users\\HyanCosta\\Desktop\\Compilador\\Arquivos";
-    String nomeArquivoFiltradoString = "ArquivoFiltrado.txt";
+
+    private EscreverArquivos escreverArquivo;
+
+    public Manipulador(EscreverArquivos escreverArquivo) {
+        this.escreverArquivo = escreverArquivo;
+    }
 
     static Scanner ler = new Scanner(System.in);
 
@@ -41,32 +42,12 @@ public class Manipulador {
                 }
             }
 
-            EscreverArquivo(texto);
+            
+            escreverArquivo.EscreverArquivo(texto);
             lerArquivo.close();
             
         } catch (Exception ex) {
             System.out.println("Erro de leitura de arquivo: " + ex.getMessage());
         }
     }
-
-    private void EscreverArquivo(String texto) {
-        try {
-            Path dirPath = Paths.get(pastaSaida);
-            
-            if (Files.notExists(dirPath)) {
-                Files.createDirectories(dirPath);
-            }
-
-            Path novoArquivo = dirPath.resolve(nomeArquivoFiltradoString);
-            System.out.println("Salvando limpo em: " + novoArquivo.toAbsolutePath());
-
-            Files.writeString(novoArquivo, texto);
-            System.out.println("Arquivo de referência gerado com sucesso!");
-
-        } catch (Exception ex) {
-            System.out.println("Erro durante a escrita: " + ex.getMessage());
-            ex.printStackTrace(); 
-        }
-    }
-
 }
