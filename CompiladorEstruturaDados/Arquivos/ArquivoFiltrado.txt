@@ -1,0 +1,5 @@
+TESTE
+var
+"Valor x"
+10
+if

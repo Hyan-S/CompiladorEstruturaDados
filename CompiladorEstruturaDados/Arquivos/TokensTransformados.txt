@@ -1,0 +1,6 @@
+[Id, TESTE]
+[var, var]
+[ERRO_LEXICO, "Valor]
+[ERRO_LEXICO, x"]
+[Nu, 10]
+[if, if]
