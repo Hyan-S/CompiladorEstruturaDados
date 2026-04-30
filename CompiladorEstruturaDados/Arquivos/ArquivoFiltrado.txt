@@ -4,4 +4,4 @@ var
 AND
 "Frase"
 10
-if
+if if if

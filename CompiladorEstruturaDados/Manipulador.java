@@ -31,6 +31,7 @@ public class Manipulador {
             while ((line = lerArquivo.readLine()) != null) {
                 
                 int indexComentario = line.indexOf("//");
+                
                 if (indexComentario != -1) {
                     line = line.substring(0, indexComentario);
                 }
