@@ -9,6 +9,8 @@ public class TransformarTokens {
     String caminhoReferencias = "C:\\Users\\iurye\\Desktop\\Atividade Carmen\\CompiladorEstruturaDados\\Referencias\\Referencias.txt";
     String pastaSaida = "C:\\Users\\iurye\\Desktop\\Atividade Carmen\\CompiladorEstruturaDados\\Arquivos";
     String nomeArquivoTokens = "TokensTransformados.txt";
+    
+    String nomeArquivoErros = "RelatorioErros.txt"; 
 
     public void transformarTokens(String texto) {
         try {
@@ -26,6 +28,7 @@ public class TransformarTokens {
             String[] tokensIniciais = textoFormatado.trim().split("\\s+");
 
             StringBuilder resultado = new StringBuilder();
+            StringBuilder erros = new StringBuilder(); 
             
             for (String token : tokensIniciais) {
                 if (token.isEmpty()) continue; 
@@ -45,7 +48,7 @@ public class TransformarTokens {
                 } else if (token.matches("[a-zA-Z]+")) {
                     resultado.append(String.format("[Id, %s]\n", token));
                 } else {
-                    resultado.append(String.format("[ERRO_LEXICO, %s]\n", token));
+                    erros.append(String.format("[ERRO_LEXICO] Token não reconhecido: %s\n", token));
                 }
             }
 
@@ -57,7 +60,13 @@ public class TransformarTokens {
             Path arquivoSaida = dirPath.resolve(nomeArquivoTokens);
             Files.writeString(arquivoSaida, resultado.toString());
             
-            System.out.println("Arquivo de TOKENS gerado com sucesso em: " + arquivoSaida.toAbsolutePath());
+            // Salva o Relatório de Erros
+            Path arquivoErros = dirPath.resolve(nomeArquivoErros);
+            Files.writeString(arquivoErros, erros.toString());
+            
+            System.out.println("Processamento concluído!");
+            System.out.println("Tokens: " + arquivoSaida.toAbsolutePath());
+            System.out.println("Erros: " + arquivoErros.toAbsolutePath());
 
         } catch (Exception ex) {
             System.out.println("Erro ao transformar tokens: " + ex.getMessage());

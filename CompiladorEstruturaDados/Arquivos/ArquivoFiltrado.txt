@@ -1,5 +1,7 @@
 TESTE
 var
-"Valor x"
+"Valor x
+AND
+"Frase"
 10
 if
